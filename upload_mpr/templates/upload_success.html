@@ -1,0 +1,32 @@
+
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Uploaded Folder</title>
+    <link rel="stylesheet" href="{% static 'bootstrap.min.css' %}">
+</head>
+<body>
+    <div class="container mt-5">
+        <h1 class="mb-4">Successfully Uploaded Folders</h1>
+        <form method="POST" action="{% url 'delete_files' %}">
+            {% csrf_token %}
+            <ul class="list-group mb-4">
+                {% for file in files %}
+                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                        <input type="checkbox" name="files_to_delete" value="{{ file.id }}">
+                        {{ file.file.name }}
+                        <span class="badge bg-primary rounded-pill">{{ file.uploaded_at }}</span>
+                    </li>
+                {% endfor %}
+            </ul>
+            <button type="submit" class="btn btn-danger">Delete Selected Files</button>
+            <button type="submit" name="delete_all" class="btn btn-warning">Delete All Files</button>
+        </form>
+    </div>
+
+    <script src="{% static 'bootstrap.bundle.min.js' %}"></script>
+</body>
+</html>

@@ -1,0 +1,44 @@
+{% load static %}
+{% load widget_tweaks %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Upload Merchant MPR/Bank Statement</title>
+    <link rel="stylesheet" href="{% static 'bootstrap.min.css' %}">
+</head>
+<body>
+    <div class="container mt-5">
+        <h1 class="mb-4">Upload Merchant MPR/Bank Statement</h1>
+
+        <form method="POST" enctype="multipart/form-data">
+            {% csrf_token %}
+            
+            <div class="form-group mb-4">
+                <h2 class="h5">Merchant Name</h2>
+                {{ form.merchant_name|add_class:"form-control" }}
+            </div>
+
+            <div class="form-group mb-4">
+                <h2 class="h5">Bank/PG</h2>
+                {{ form.bank_name|add_class:"form-control" }}
+            </div>
+
+            <div class="form-group mb-4">
+                <h2 class="h5">TXN Type</h2>
+                {{ form.txn_type|add_class:"form-control" }}
+            </div>
+
+            <div class="form-group mb-4">
+                <h2 class="h5">Upload Folder</h2>
+                <input type="file" name="file" webkitdirectory multiple accept=".csv, .xls, .xlsx" class="form-control">
+            </div>
+
+            <button type="submit" class="btn btn-primary">Upload</button>
+        </form>
+    </div>
+
+    <script src="{% static 'bootstrap.bundle.min.js' %}"></script>
+</body>
+</html>
